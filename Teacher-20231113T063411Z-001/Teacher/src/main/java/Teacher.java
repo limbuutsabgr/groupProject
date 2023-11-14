@@ -1,6 +1,16 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package groupproject;
+
+/**
+ *
+ * @author Owner
+ */
 
 import java.util.Scanner;
-
 
 public class Teacher {
     public static void upload(){
@@ -24,10 +34,10 @@ public class Teacher {
                 filetype ="pdf";
                 break;
             case 2:
-                filetype ="pdf";
+                filetype ="png";
                 break;
             case 3:
-                filetype ="pdf";
+                filetype ="jpeg";
                 break;                
         }
         System.out.println(" You have uploaded an assignment for course " + Cname + "\nThe assignment "
@@ -39,57 +49,81 @@ public class Teacher {
     
     public static void view(){
         Scanner scanner = new Scanner(System.in);
-        
-        System.out.println("Please enter student name, student ID or Student's HKID.");
+        System.out.println("Please enter Student ID.");
         String searchname = scanner.nextLine();
-        System.out.println("What would you like to view: \t1. Student schedule \t2. Student grades \t3. Student information");
-        int viewchoice = scanner.nextInt();
-        switch (viewchoice) {
-            case 1:
-                System.out.println("Student \"" + searchname +"\" Schedule \nMonday: Maths \nTuesday: English Lecture \nWednesday: Chinese");
-                break;
-            case 2:
-                System.out.println("Student \"" + searchname +"\" Grades  \nEnglish: A\nChinese: B+\nMath: B- ");
-                break;
-            case 3:
-                System.out.println("Student \"" + searchname +"\" Information \nAttendance: 80% \nCGPA: 3.0");
-                break;
-        }
-    }
+        
+        for (User x: User.users){
+            if(x.getStaffID().equals(searchname)){
+                    System.out.println("What would you like to view: \t1. Student information \t2. Student grades");
+                    int viewchoice = scanner.nextInt();
+                    switch(viewchoice){
+                        case 1:
+                            System.out.println(personalInformation.p1.viewPersonalInformation());
+                            break;
+                        case 2:
+                            System.out.println(academicRecord.a1.viewAcademicRecord());
+                            break;
+                        }
+                } else if(searchname.equals(personalInformation.p1.getHkId())){
+                    System.out.println("What would you like to view: \t1. Student information \t2. Student grades");
+                    int viewchoice = scanner.nextInt();
+                    switch(viewchoice){
+                        case 1:
+                            System.out.println(personalInformation.p2.viewPersonalInformation());
+                            break;
+                        case 2:
+                            System.out.println(academicRecord.a2.viewAcademicRecord());
+                            break;
+                          }
+                }   System.out.println("User not found");
+                    break;
+            } 
+     }
+         
+                 
+    
+     
+
     
     public static void update(){
         Scanner scanner = new Scanner(System.in);
-        
-        System.out.println("Please enter student name, student ID or Student's HKID.");
+        System.out.println("Please enter Student ID.");
         String searchname = scanner.nextLine();
-        System.out.println("What would you like to update: \t1. Student schedule \t2. Student grades \t3. Student information");
-        int updatechoice = scanner.nextInt();
-        scanner.nextLine();
-        switch (updatechoice) {
-            case 1:
-                System.out.println("Student \"" + searchname +"\" Schedule \nMonday: Maths \nTuesday: English Lecture \nWednesday: Chinese \nWhich day to change\n1.Monday\n2.Tueaday\n3.Wednesday\n4.Thursday\n5.Friday ");
-                String Uday = scanner.nextLine();
-                System.out.println("What class to add.");
-                String Uadd = scanner.nextLine();
-                System.out.println("Student \"" + searchname +"\" has class " + Uadd +" on "+ Uday);
-                break;
-            case 2:
-                System.out.println("Student \"" + searchname +"\" Grades  \nEnglish: A\nChinese: B+\nMath: B-\nWhat course to update?");
-                String Ucourse = scanner.nextLine();
-                System.out.println("Input updated grade.");
-                String Ugrade = scanner.nextLine();
-                System.out.println("Student \"" + searchname +"\" has grade " + Ugrade +" on "+ Ucourse);                
-                break;
-            case 3:
-                System.out.println("Student \"" + searchname +"\" Information \nAttendance: 80% \nCGPA: 3.0\nWhat information to update?");
-                String info = scanner.nextLine();
-                System.out.println("Input updated information.");
-                String Uinfo = scanner.nextLine();
-                System.out.println("Student \"" + searchname +"\" has " + Uinfo +" on "+ info); 
-                break;
-        }
-    }
-    
+        
+        for (User x: User.users){
+            if(x.getStaffID().equals(searchname)){
+                   System.out.println("Input new score for Chinese");
+                   int Uchinese = scanner.nextInt();
+                   System.out.println("Input new score for English");
+                   int Uenglish = scanner.nextInt();
+                   System.out.println("Input new score for Math");
+                   int Umath = scanner.nextInt();
+                   System.out.println("Input new score for Science");
+                   int Uscience = scanner.nextInt();
+                   System.out.println("Input new score for PE");
+                   int Upe = scanner.nextInt();               
+                   academicRecord a1 = new academicRecord(Uchinese,Uenglish,Umath,Uscience,Upe);
+                   academicRecord.setA1(a1);
+                   System.out.println(academicRecord.a1.viewAcademicRecord());
+                    } else if(searchname.equals(personalInformation.p2.getHkId())){
+                        System.out.println("Input new score for Chinese");
+                        int Uchinese = scanner.nextInt();
+                        System.out.println("Input new score for English");
+                        int Uenglish = scanner.nextInt();
+                        System.out.println("Input new score for Math");
+                        int Umath = scanner.nextInt();
+                        System.out.println("Input new score for Science");
+                        int Uscience = scanner.nextInt();
+                        System.out.println("Input new score for PE");
+                        int Upe = scanner.nextInt();               
+                        academicRecord a2 = new academicRecord(Uchinese,Uenglish,Umath,Uscience,Upe);
+                        academicRecord.setA2(a2);
+                        System.out.println(academicRecord.a2.viewAcademicRecord());
+                  
+                        }  System.out.println("User not found.");
+                            break;
+                 }
+        }     
     
     public static void main(String[] args) {
     System.out.println("Press 1 to upload files \n Press 2 to view student information \n Press 3 to update student academic record");
@@ -106,6 +140,6 @@ public class Teacher {
         case 3:
             update();
             break;
-    } 
+        } 
     }
 }
